@@ -2,7 +2,7 @@ import { userInterface } from "../entities/userInterface";
 import { prismaClient } from "../prisma";
 import { hash } from "bcrypt";
 
-class novo_usuario_service {
+class cadastroUsuarioServices {
     async excute(props: userInterface){
         let user = await prismaClient.user.findUnique({
             where: {
@@ -35,4 +35,4 @@ class novo_usuario_service {
     }
 }
 
-export {novo_usuario_service}
+export {cadastroUsuarioServices}

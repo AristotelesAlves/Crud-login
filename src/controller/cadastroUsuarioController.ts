@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
-import { novo_usuario_service } from "../services/novo_usuario_services";
+import { cadastroUsuarioServices } from "../services/cadastroUsuarioServices";
 
-class novo_user_controller{
+class cadastroUsuarioController{
     async handle(req: Request, res: Response){
         const {nome,email,senha} = req.body;
-        const service = new novo_usuario_service();
+        const service = new cadastroUsuarioServices();
         const result = await service.excute({nome, email, senha});
         res.json(result);
     }
 }
 
-export { novo_user_controller }
+export { cadastroUsuarioController }
