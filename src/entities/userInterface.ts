@@ -1,5 +1,5 @@
 interface userInterface {
-    nome: string;
+    nome?: string;
     senha: string;
     email: string;
 }

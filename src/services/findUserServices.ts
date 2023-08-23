@@ -1,24 +1,25 @@
+import { userInterface } from "../entities/userInterface";
 import { prismaClient } from "../prisma";
-import { compare } from "bcrypt"
+import { compareSync } from "bcrypt"
 
 class findUserServices{
-    async execute(){
+    async execute(props : userInterface){
         const findUser = await prismaClient.user.findUnique({
             where: {
-                email
+                email: props.email
             }
         })
 
         const {senha} = findUser
+        const match = compareSync(props.senha,senha)
+        console.log(match)
+        if (!match){
+            return('senha incorreta')
+        } 
 
-        const match = senha == compare("d")
-
-        if(!findUser){
-            try {
-                
-            } catch (error) {
-                return error
-            }
-        }
+        return findUser
+        
     }
 }
+
+export { findUserServices }
