@@ -22,14 +22,12 @@ class recuperacaoSenhaServices{
             
             const code = await prismaClient.recoveryCode.findUnique({
                 where:{
-                    id: user.code_id,
+                    email: user.email,
                 }
             })
-
             if(!code){
-                return 'Código não encontrado'
-            }  
-            
+                return 'Código de verificação não encontrado, gere novamente!'
+            }
             const comparacao = compareSync(props.code,code.code)
 
             if(!comparacao){

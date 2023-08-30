@@ -5,7 +5,7 @@ class cadastroUsuarioController{
     async handle(req: Request, res: Response){
         const {nome,email,senha} = req.body;
         const service = new cadastroUsuarioServices();
-        const result = await service.excute({nome, email, senha});
+        const result = await service.execute({nome, email, senha});
         res.json(result);
     }
 }

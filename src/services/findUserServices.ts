@@ -7,7 +7,7 @@ class findUserServices{
     async execute(props : userInterface){
         
         try {
-            let findUser = await prismaClient.user.findUnique({
+            const findUser = await prismaClient.user.findUnique({
                 where: {
                     email: props.email
                 }
