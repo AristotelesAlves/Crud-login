@@ -19,7 +19,12 @@ class cadastroUsuarioServices {
                     data:{
                         nome: props.nome,
                         email: props.email,
-                        senha: hashpassword
+                        senha: hashpassword,
+                        code:{
+                            create:{
+                                code: hashpassword
+                            }
+                        }
                     }
                 })
                 const mensagemUser = "Usuário cadastrado com sucesso!"

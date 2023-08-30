@@ -5,25 +5,34 @@ import  jwt  from "jsonwebtoken";
 
 class findUserServices{
     async execute(props : userInterface){
-        const findUser = await prismaClient.user.findUnique({
-            where: {
-                email: props.email
+        
+        try {
+            let findUser = await prismaClient.user.findUnique({
+                where: {
+                    email: props.email
+                }
+            })
+            
+            if(!findUser){
+                return('Usuário não encontrado!')
             }
-        })
 
-        const {senha, id} = findUser
-        const match = compareSync(props.senha,senha)
-        console.log(match)
-        if (!match){
-            return('senha incorreta')
-        } 
+            const {senha, id} = findUser
+            const match = compareSync(props.senha,senha)
+            
+            if (!match){
+                return('senha incorreta')
+            } 
 
-        const token = jwt.sign({usuario:id}, process.env.SECRECRETE_KAY, {
-            expiresIn: '24h'
-        });
+            const token = jwt.sign({usuario:id}, process.env.SECRECRETE_KAY, {
+                expiresIn: '24h'
+            });
 
-        return {findUser, token}
+            return {findUser, token}
 
+        } catch (error) {
+            console.error(error('Erro ao buscar usuário'))
+        }
     }
 }
 

@@ -12,14 +12,23 @@ model User {
   nome           String
   senha          String
   email          String           @unique
-  contas_receber Contas_receber[]
+  code RecoveryCode? @relation(fields: [code_id], references: [id])
+  code_id String
+  // contas_receber Contas_receber[]
 }
 
-model Contas_receber {
-  id              Int      @id @default(autoincrement())
-  valor           Int
-  parcela         Int
-  data_lancamento DateTime @updatedAt
-  user            User     @relation(fields: [user_id], references: [id])
-  user_id         String
+model RecoveryCode{
+  id String @id @default(uuid())
+  code String @unique
+  data DateTime @updatedAt
+  user User[]
 }
+
+// model Contas_receber {
+//   id              Int      @id @default(autoincrement())
+//   valor           Int
+//   parcela         Int
+//   data_lancamento DateTime @updatedAt
+//   user            User?     @relation(fields: [user_id], references: [id])
+//   user_id         String?
+// }
